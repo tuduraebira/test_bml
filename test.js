@@ -1,5 +1,5 @@
 let str = 'hoge';
 
-(function () {
+javascript:(function () {
     alert(str);
 })();
