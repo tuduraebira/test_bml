@@ -1,4 +1,4 @@
-let str = 'Hello, World!';
+let str = 'yeah';
 
 export default () => {  
     alert(str);  
