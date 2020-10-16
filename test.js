@@ -1,4 +1,4 @@
-let str = 'wow';
+let str = 'hoge';
 
 (function () {
     alert(str);
