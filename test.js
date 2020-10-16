@@ -1,3 +1,5 @@
+let str = 'Hello, World!';
+
 export default () => {  
-    alert('Hello, World!');  
+    alert(str);  
 };
