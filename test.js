@@ -1,5 +1,5 @@
 let str = 'yeah';
 
-export default () => {  
+export default () => { 
     alert(str);  
 };
