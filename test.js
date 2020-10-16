@@ -1,5 +1,5 @@
 let str = 'wow';
 
-export default () => { 
-    alert(str);  
-};
+(function () {
+    alert(str);
+})();
