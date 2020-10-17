@@ -1,5 +1,13 @@
 const DATA_URL = 'https://p.eagate.573.jp/game/sdvx/v/p/playdata/musicdata/index.html';
 
+$.wait = (function(msec){
+    let d = $.Deferred();
+    setTimeout(function(){
+        d.resolve();
+    }, msec);
+    return d.promise();
+})
+
 alert('プレースコアを取得します。\n※公式サイトのプロフィール画面から起動させてください。');
 
 const bg_tool = $('<div>').addClass('bg_tool').attr('style', 'position:fixed; top:0; z-index:10; width:100%; height:100%; background-color:rgba(0,0,0,0.6);');
@@ -8,3 +16,15 @@ const txt_getScore = $('<span>').addClass('txt_getScore').attr('style', 'font-si
 box_info.append(txt_getScore);
 bg_tool.append(box_info);
 $('body').append(bg_tool);
+
+$.ajax({
+    type: 'GET',
+    url: DATA_URL
+}).done(function(){
+    alert('接続成功です。');
+
+    $.wait(10000).done(function(){
+        alert('通信品質が悪いです。');
+        return;
+    })
+})
