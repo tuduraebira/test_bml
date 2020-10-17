@@ -1,5 +1,1 @@
-let str = 'hoge';
-
-javascript:(function () {
-    alert(str);
-})();
+alert('プレースコアを取得します。\n※公式サイトのプロフィール画面から起動させてください。');
