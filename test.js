@@ -49,6 +49,7 @@ const getURLData = (function(page){
 
                 if(url_music != null){
                     alert('取得成功');
+                    getScoreData(url_music);
                     alert(txt);
                     return;
                 }else{
