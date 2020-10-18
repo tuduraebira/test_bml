@@ -1,6 +1,7 @@
 const BASE_URL = 'https://p.eagate.573.jp';
 const MUSIC_URL = '/game/sdvx/v/p/playdata/musicdata/index.html';
 
+let flag = 0;
 let chart_data = [];
 let max_page = -1;
 
@@ -19,9 +20,11 @@ const getScoreData = (function(url_m){
             url: BASE_URL + url_m
         }).done(function(data_score){
             if($(data_score).find('.level').text() == 18){
-                return 1;
+                flag = 1;
+                return;
             }else{
-                return 2;
+                flag = 2;
+                return;
             }
         }).fail(function(){
             setTimeout(function(){
@@ -44,12 +47,11 @@ const getURLData = (function(page){
             }
 
             $(data_url).find('.data_col').each(function(){
-                let flag = 0;
                 let url_music = $(this).find('.music .title a').attr('href');
 
                 if(url_music != null){
                     alert('取得成功');
-                    flag = getScoreData(url_music);
+                    getScoreData(url_music);
                     if(flag == 1){
                         alert('レベル18あり');
                     }else if(flag == 2){
