@@ -19,7 +19,9 @@ const getScoreData = (function(url_m){
             type: 'GET',
             url: BASE_URL + url_m
         }).done(function(data_score){
-            txt = $(data_score).find('.level').text();
+            $(data_score).find('.level').each(function(){
+                txt = $(this).text();
+            });
             return;
         }).fail(function(){
             setTimeout(function(){
