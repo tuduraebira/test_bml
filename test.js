@@ -25,6 +25,7 @@ const getScoreData = (function(url_m){
             });
             return;
         }).fail(function(){
+            txt = 'failed';
             setTimeout(function(){
                 $.ajax(this);
             }, 500);
