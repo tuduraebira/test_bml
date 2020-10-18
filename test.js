@@ -37,7 +37,7 @@ const getURLData = (function(page){
     $.wait(5000).done(function(){
         $.ajax({
             type: 'GET',
-            url: DATA_URL + '?page=' + String(page) + '&sort=0'
+            url: BASE_URL + MUSIC_URL + '?page=' + String(page) + '&sort=0'
         }).done(function(data_url){
             if($(data_url).find('.data_col').length <= 0){
                 setTimeout(function(){
