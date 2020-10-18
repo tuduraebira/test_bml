@@ -19,6 +19,7 @@ const getScoreData = (function(url_m){
             type: 'GET',
             url: BASE_URL + url_m
         }).done(function(data_score){
+            txt = 'success';
             $(data_score).find('.level').each(function(){
                 txt = $(this).text();
             });
