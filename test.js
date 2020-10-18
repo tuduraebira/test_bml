@@ -14,18 +14,19 @@ $.wait = (function(msec){
 })
 
 const getScoreData = (function(url_m){
-    txt = url_m;
     $.ajax({
         type: 'GET',
         url: BASE_URL + url_m
     }).done(function(data_score){
         txt = 'success';
+        console.log(txt);
         $(data_score).find('.level').each(function(){
             txt = $(this).text();
         });
         return;
     }).fail(function(){
         txt = 'failed';
+        console.log(txt);
         setTimeout(function(){
             $.ajax(this);
         }, 500);
@@ -48,9 +49,8 @@ const getURLData = (function(page){
                 let url_music = $(this).find('.music .title a').attr('href');
 
                 if(url_music != null){
-                    alert('取得成功');
+                    alert('URLデータ取得成功');
                     getScoreData(url_music);
-                    alert(typeof(url_music));
                     console.log(txt);
                     return;
                 }else{
