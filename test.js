@@ -91,7 +91,7 @@ $.ajax({
     //alert('接続成功です。');
     //return;
 
-    $.wait(10000).done(function(){
+    $.wait((max_page + 20) * 1000).done(function(){
         alert('通信品質が悪いです。');
         return;
     })
