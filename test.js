@@ -1,4 +1,7 @@
-const DATA_URL = 'https://p.eagate.573.jp/game/sdvx/v/p/playdata/musicdata/index.html';
+const BASE_URL = 'https://p.eagate.573.jp';
+const MUSIC_URL = '/game/sdvx/v/p/playdata/musicdata/index.html';
+
+let chart_data = [];
 let max_page = -1;
 
 $.wait = (function(msec){
@@ -9,24 +12,45 @@ $.wait = (function(msec){
     return d.promise();
 })
 
-const getScoreData = (function(page){
+const getScoreData = (function(url_m){
+    $.wait(10000).done(function(){
+        $.ajax({
+            type: 'GET',
+            url: BASE_URL + url_m
+        }).done(function(data_score){
+            if($(data_score).find('.level').text() == 18){
+                alert('レベル18があります。');
+                return;
+            }else{
+                alert('レベル18がありません。');
+                return;
+            }
+        }).fail(function(){
+            setTimeout(function(){
+                $.ajax(this);
+            }, 500);
+        });
+    });
+});
+
+const getURLData = (function(page){
     $.wait(5000).done(function(){
         $.ajax({
             type: 'GET',
             url: DATA_URL + '?page=' + String(page) + '&sort=0'
-        }).done(function(data_score){
-            if($(data_score).find('.data_col').length <= 0){
+        }).done(function(data_url){
+            if($(data_url).find('.data_col').length <= 0){
                 setTimeout(function(){
                     $.ajax(this);
                 }, 500);
             }
 
-            $(data_score).find('.data_col').each(function(){
+            $(data_url).find('.data_col').each(function(){
                 let url_music = $(this).find('.music .title a').attr('href');
 
                 if(url_music != null){
                     alert('取得成功');
-                    alert(url_music);
+                    getScoreData(url_music);
                     return;
                 }else{
                     alert('取得失敗');
@@ -52,7 +76,7 @@ $('body').append(bg_tool);
 
 $.ajax({
     type: 'GET',
-    url: DATA_URL
+    url: BASE_URL + MUSIC_URL
 }).done(function(data_num){
     max_page = Number($(data_num).find('.page_num').last().text());
     if(max_page == 0){
@@ -61,7 +85,7 @@ $.ajax({
     }
 
     for(let i = 1; i <= max_page; i++){
-        getScoreData(i);
+        getURLData(i);
     }
 
     //alert('接続成功です。');
