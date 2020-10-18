@@ -9,6 +9,38 @@ $.wait = (function(msec){
     return d.promise();
 })
 
+const getScoreData = (function(page){
+    $.wait(5000).done(function(){
+        $.ajax({
+            type: 'GET',
+            url: DATA_URL + '?page=' + String(page) + '&sort=0'
+        }).done(function(data_score){
+            if($(data_score).find('.data_col').length <= 0){
+                setTimeout(function(){
+                    $.ajax(this);
+                }, 500);
+            }
+
+            $(data_score).find('.data_col').each(function(){
+                let url_music = $(this).find('.music .title a').attr('href');
+
+                if(url_music != null){
+                    alert('取得成功');
+                    alert(url_music);
+                    return;
+                }else{
+                    alert('取得失敗');
+                    return;
+                }
+            });
+        }).fail(function(){
+            setTimeout(function(){
+                $.ajax(this);
+            }, 500);
+        });
+    });
+});
+
 alert('プレースコアを取得します。\n※公式サイトのプロフィール画面から起動させてください。');
 
 const bg_tool = $('<div>').addClass('bg_tool').attr('style', 'position:fixed; top:0; z-index:10; width:100%; height:100%; background-color:rgba(0,0,0,0.6);');
@@ -29,10 +61,10 @@ $.ajax({
     }
 
     for(let i = 1; i <= max_page; i++){
-        //getScoreData(i);
+        getScoreData(i);
     }
 
-    alert('接続成功です。');
+    //alert('接続成功です。');
     //return;
 
     $.wait(10000).done(function(){
