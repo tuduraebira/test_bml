@@ -14,7 +14,8 @@ $.wait = (function(msec){
 })
 
 const getScoreData = (function(url_m){
-    $.wait(10000).done(function(){
+    txt = url_m;
+    $.wait(1000).done(function(){
         $.ajax({
             type: 'GET',
             url: BASE_URL + url_m
