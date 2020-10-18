@@ -14,6 +14,7 @@ $.wait = (function(msec){
 })
 
 const getScoreData = (function(url_m){
+    txt = url_m;
     $.ajax({
         type: 'GET',
         url: BASE_URL + url_m
@@ -50,6 +51,7 @@ const getURLData = (function(page){
                     alert('取得成功');
                     getScoreData(url_music);
                     alert(typeof(url_music));
+                    console.log(txt);
                     return;
                 }else{
                     alert('取得失敗');
