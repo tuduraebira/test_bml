@@ -92,6 +92,7 @@ $.ajax({
     for(let i = 1; i <= max_page; i++){
         getURLData(i);
     }
+    console.log('show the text');
 
     //alert('接続成功です。');
     //return;
