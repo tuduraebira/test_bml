@@ -14,23 +14,20 @@ $.wait = (function(msec){
 })
 
 const getScoreData = (function(url_m){
-    txt = url_m;
-    $.wait(1000).done(function(){
-        $.ajax({
-            type: 'GET',
-            url: BASE_URL + url_m
-        }).done(function(data_score){
-            txt = 'success';
-            $(data_score).find('.level').each(function(){
-                txt = $(this).text();
-            });
-            return;
-        }).fail(function(){
-            txt = 'failed';
-            setTimeout(function(){
-                $.ajax(this);
-            }, 500);
+    $.ajax({
+        type: 'GET',
+        url: BASE_URL + url_m
+    }).done(function(data_score){
+        txt = 'success';
+        $(data_score).find('.level').each(function(){
+            txt = $(this).text();
         });
+        return;
+    }).fail(function(){
+        txt = 'failed';
+        setTimeout(function(){
+            $.ajax(this);
+        }, 500);
     });
 });
 
