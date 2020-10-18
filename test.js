@@ -1,7 +1,9 @@
 const BASE_URL = 'https://p.eagate.573.jp';
 const MUSIC_URL = '/game/sdvx/v/p/playdata/musicdata/index.html';
+const TEMP_URL = 'https://p.eagate.573.jp/game/sdvx/v/p/playdata/musicdata/data_detail.html?music_id=4Lqg3tk92_Q8PidqUfpU2Q';
 
 let txt;
+let url_part = [];
 let chart_data = [];
 let max_page = -1;
 
@@ -11,27 +13,6 @@ $.wait = (function(msec){
         d.resolve();
     }, msec);
     return d.promise();
-})
-
-const getScoreData = (function(url_m){
-    txt = url_m;
-    $.ajax({
-        type: 'GET',
-        url: BASE_URL + url_m
-    }).done(function(data_score){
-        txt = 'success';
-        console.log(txt);
-        $(data_score).find('.level').each(function(){
-            txt = $(this).text();
-        });
-        return;
-    }).fail(function(){
-        txt = 'failed';
-        console.log(txt);
-        setTimeout(function(){
-            $.ajax(this);
-        }, 500);
-    });
 });
 
 const getURLData = (function(page){
@@ -50,14 +31,14 @@ const getURLData = (function(page){
                 let url_music = $(this).find('.music .title a').attr('href');
 
                 if(url_music != null){
-                    alert('URLデータ取得成功');
-                    getScoreData(url_music);
-                    console.log(txt);
-                    return;
+                    //getScoreData(url_music);
+                    url_part.push(url_music);
                 }else{
                     alert('取得失敗');
-                    return;
+                    return false;
                 }
+
+                console.log(url_part);
             });
         }).fail(function(){
             setTimeout(function(){
@@ -66,6 +47,28 @@ const getURLData = (function(page){
         });
     });
 });
+
+/*const getScoreData = (function(url_m){
+    txt = url_m;
+    $.ajax({
+        type: 'GET',
+        url: BASE_URL + url_m
+    }).done(function(data_score){
+        txt = 'success';
+        console.log(txt);
+        $(data_score).find('.level').each(function(){
+            txt = $(this).text();
+        });
+        return;
+    }).fail(function(){
+        txt = 'failed';
+        console.log(txt);
+        setTimeout(function(){
+            $.ajax(this);
+        }, 500);
+    });
+    console.log('end');
+});*/
 
 alert('プレースコアを取得します。\n※公式サイトのプロフィール画面から起動させてください。');
 
