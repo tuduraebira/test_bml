@@ -19,11 +19,9 @@ const getScoreData = (function(url_m){
             url: BASE_URL + url_m
         }).done(function(data_score){
             if($(data_score).find('.level').text() == 18){
-                alert('レベル18があります。');
-                return;
+                return 1;
             }else{
-                alert('レベル18がありません。');
-                return;
+                return 2;
             }
         }).fail(function(){
             setTimeout(function(){
@@ -46,11 +44,19 @@ const getURLData = (function(page){
             }
 
             $(data_url).find('.data_col').each(function(){
+                let flag = 0;
                 let url_music = $(this).find('.music .title a').attr('href');
 
                 if(url_music != null){
                     alert('取得成功');
-                    getScoreData(url_music);
+                    flag = getScoreData(url_music);
+                    if(flag == 1){
+                        alert('レベル18あり');
+                    }else if(flag == 2){
+                        alert('レベル18なし');
+                    }else{
+                        alert('探索失敗');
+                    }
                     return;
                 }else{
                     alert('取得失敗');
