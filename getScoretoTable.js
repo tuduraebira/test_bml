@@ -2,7 +2,6 @@ const BASE_URL = 'https://p.eagate.573.jp';
 const MUSIC_URL = '/game/sdvx/v/p/playdata/musicdata/index.html';
 const TEMP_URL = 'https://p.eagate.573.jp/game/sdvx/v/p/playdata/musicdata/data_detail.html?music_id=4Lqg3tk92_Q8PidqUfpU2Q';
 
-let txt;
 let url_part = [];
 let chart_data = [];
 let max_page = -1;
@@ -185,12 +184,20 @@ function getScoreData(url_m){
                     }
                 }
             }).done(function(data_score){
-                
+                $(data_score).find('.diff').each(function(){
+                    let txt = $(this).find('.level').text();
+
+                    if(txt == 18){
+                        chart_data.push(txt);
+                    }
+                });
+
+                resolve('難易度取得完了');
             })
         }catch(err){
             reject(err);
         }
-    })
+    });
 }
 
 async function processAll(){
@@ -198,6 +205,9 @@ async function processAll(){
         await getMaxPage();
         for(let i = 1; i <= max_page; i++){
             await getURLPartData(i);
+        }
+        for(let i = 0; i < url_part.length; i++){
+            await getURLPartData(url_part[i]);
         }
     }catch(err){
         throw err;
@@ -207,6 +217,7 @@ async function processAll(){
 processAll().then(() => {
     console.log('end');
     console.log(url_part);
+    console.log(chart_data);
 }).catch((err) => {
     console.log(err);
 })
