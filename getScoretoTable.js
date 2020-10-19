@@ -183,7 +183,7 @@ async function processAll(){
     }
 }
 
-getMaxPage().then(() => {
+processAll().then(() => {
     console.log('end');
     console.log(url_part);
 }).catch((err) => {
