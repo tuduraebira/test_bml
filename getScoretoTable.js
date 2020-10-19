@@ -149,6 +149,7 @@ function getURLPartData(page){
                 }
             }).done(function(data_url){
                 if($(data_url).find('.data_col').length <= 0){
+                    console.log(data_url);
                     throw new Error('cannot find data column');
                 }
 
