@@ -209,7 +209,7 @@ async function processAll(){
             await getURLPartData(i);
         }
         for(let i = 0; i < url_part.length; i++){
-            await getURLPartData(url_part[i]);
+            await getScoreData(url_part[i]);
         }
     }catch(err){
         throw err;
