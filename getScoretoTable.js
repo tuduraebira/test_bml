@@ -122,9 +122,8 @@ function getMaxPage(){
                 });
 
                 console.log('1:' + max_page);
+                resolve('ページ数取得完了');
             });
-
-            resolve('ページ数取得完了');
         }catch(err){
             reject(err);
         }
