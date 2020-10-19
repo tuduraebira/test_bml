@@ -162,7 +162,7 @@ function getURLPartData(page){
                     }
                 });
 
-                console.log(url_part);
+                //console.log(url_part);
                 resolve('URLデータ取得完了');
             });
         }catch(err){
