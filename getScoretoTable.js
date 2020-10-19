@@ -204,7 +204,7 @@ function getScoreData(url_m){
 async function processAll(){
     try{
         await getMaxPage();
-        for(let i = 1; i <= max_page; i++){
+        for(let i = 1; i < max_page; i++){
             await getURLPartData(i);
         }
         for(let i = 0; i < url_part.length; i++){
