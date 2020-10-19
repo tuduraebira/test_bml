@@ -108,7 +108,13 @@ function getMaxPage(){
         try{
             $.ajax({
                 type: 'GET',
-                url: BASE_URL + MUSIC_URL
+                url: BASE_URL + MUSIC_URL,
+                timeout: 5000,
+                error: function(xhr, textStatus, errorThrown){
+                    if(textStatus == 'timeout'){
+                        throw new Error('cannot connected');
+                    }
+                }
             }).done(function(data_num){
                 max_page = Number($(data_num).find('.page_num').last().text());
                 if(max_page == 0){
@@ -116,10 +122,10 @@ function getMaxPage(){
                     throw new Error('failed to get score');
                 }
         
-                $.wait((max_page + 20) * 1000).done(function(){
+                /*$.wait((max_page + 20) * 1000).done(function(){
                     alert('通信品質が悪いです。');
                     throw new Error('cannot connected');
-                });
+                });*/
 
                 console.log('1:' + max_page);
                 resolve('ページ数取得完了');
