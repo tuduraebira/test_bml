@@ -120,6 +120,8 @@ function getMaxPage(){
                     alert('通信品質が悪いです。');
                     throw new Error('cannot connected');
                 });
+
+                console.log('1:' + max_page);
             });
 
             resolve('ページ数取得完了');
@@ -132,13 +134,14 @@ function getMaxPage(){
 async function processAll(){
     try{
         await getMaxPage();
+        console.log('2:' + max_page);
     }catch(err){
         throw err;
     }
 }
 
 getMaxPage().then(() => {
-    console.log(max_page);
+    console.log('3:' + max_page);
 }).catch((err) => {
     console.log(err);
 })
