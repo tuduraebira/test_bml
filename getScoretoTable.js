@@ -149,7 +149,7 @@ function getURLPartData(page){
                 }
             }).done(function(data_url){
                 if($(data_url).find('.data_col').length <= 0){
-                    console.log(data_url);
+                    console.log(page);
                     throw new Error('cannot find data column');
                 }
 
@@ -204,7 +204,7 @@ function getScoreData(url_m){
 async function processAll(){
     try{
         await getMaxPage();
-        for(let i = 1; i < max_page; i++){
+        for(let i = 1; i <= max_page; i++){
             await getURLPartData(i);
         }
         for(let i = 0; i < url_part.length; i++){
