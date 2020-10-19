@@ -149,8 +149,9 @@ function getURLPartData(page){
                 }
             }).done(function(data_url){
                 if($(data_url).find('.data_col').length <= 0){
-                    console.log(page);
-                    throw new Error('cannot find data column');
+                    //console.log(page);
+                    //throw new Error('cannot find data column');
+                    resolve('URLデータ取得完了');
                 }
 
                 $(data_url).find('.data_col').each(function(){
@@ -163,7 +164,7 @@ function getURLPartData(page){
                     }
                 });
 
-                console.log(url_part);
+                //console.log(url_part);
                 resolve('URLデータ取得完了');
             });
         }catch(err){
