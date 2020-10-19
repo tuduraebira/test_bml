@@ -169,6 +169,27 @@ function getURLPartData(page){
         }catch(err){
             reject(err);
         }
+    });
+}
+
+function getScoreData(url_m){
+    return new Promise((resolve, reject) => {
+        try{
+            $.ajax({
+                type: 'GET',
+                url: BASE_URL + url_m,
+                timeout: (max_page + 30) * 1000,
+                error: function(xhr, textStatus, errThrown){
+                    if(textStatus == 'timeout'){
+                        throw new Error('cannot connected');
+                    }
+                }
+            }).done(function(data_score){
+                
+            })
+        }catch(err){
+            reject(err);
+        }
     })
 }
 
