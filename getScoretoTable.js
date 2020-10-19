@@ -136,17 +136,55 @@ function getMaxPage(){
     });
 }
 
+function getURLPartData(page){
+    return new Promise((resolve, reject) => {
+        try{
+            $.ajax({
+                type: 'GET',
+                url: BASE_URL + MUSIC_URL + '?page=' + String(page) + '&sort=0',
+                timeout: (max_page + 20) * 1000,
+                error: function(xhr, textStatus, errThrown){
+                    if(textStatus == 'timeout'){
+                        throw new Error('cannot connected');
+                    }
+                }
+            }).done(function(data_url){
+                if($(data_url).find('.data_col').length <= 0){
+                    throw new Error('cannot find data column');
+                }
+
+                $(data_url).find('.data_col').each(function(){
+                    let url_music = $(this).find('.music .title a').attr('href');
+
+                    if(url_music != null){
+                        url_part.push(url_music);
+                    }else{
+                        throw new Error('cannot get URL data');
+                    }
+                });
+
+                console.log(url_part);
+                resolve('URLデータ取得完了');
+            });
+        }catch(err){
+            reject(err);
+        }
+    })
+}
+
 async function processAll(){
     try{
         await getMaxPage();
-        console.log('2:' + max_page);
+        for(let i = 1; i <= max_page; i++){
+            await getURLPartData(i);
+        }
     }catch(err){
         throw err;
     }
 }
 
 getMaxPage().then(() => {
-    console.log('3:' + max_page);
+    console.log('end');
 }).catch((err) => {
     console.log(err);
 })
