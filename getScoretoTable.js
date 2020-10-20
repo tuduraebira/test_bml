@@ -194,7 +194,7 @@ function getScoreData(url_m){
                 $(data_score).find('.music_box').each(function(){
                     if($(this).find('.jacket_area .diff .level').text() == 18){
                         diff = $(this).find('.jacket_area .diff .level').text();
-                        score = $('.cnt').first().text();
+                        score = $(this).find('.cnt').first().text();
 
                         chart_part.push(title);
                         chart_part.push(diff);
