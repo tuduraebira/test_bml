@@ -191,6 +191,8 @@ function getScoreData(url_m){
                 let diff;
                 let score;
 
+                title = title.replace(/\(EXIT TUNES\)/, '').replace(/,/, '，');
+
                 $(data_score).find('.music_box').each(function(){
                     if($(this).find('.jacket_area .diff .level').text() == 18){
                         diff = $(this).find('.jacket_area .diff .level').text();
