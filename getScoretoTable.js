@@ -214,6 +214,41 @@ function getScoreData(url_m){
     });
 }
 
+function exportCSVFile(){
+    return new Promise((resolve, reject) => {
+        try{
+            const bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+            const blob = new Blob([ bom, chart_data.join('\r\n') ], { type : 'text/csv' });
+            const element = document.createElement('a');
+            const objectUrl = window.URL.createObjectURL(blob);
+            element.href = objectUrl;
+            element.setAttribute('download', 'score_data'); 
+            document.body.appendChild(element);
+            element.click();
+            window.URL.revokeObjectURL(objectUrl);
+            document.body.removeChild(element);
+
+            resolve('CSV出力完了');
+            console.log('CSV出力完了');
+        }catch(err){
+            reject(err);
+        }
+    });
+}
+
+/*export const downloadCSV = (rows, fileName = 'download') => { 
+    const bom = new Uint8Array([0xEF, 0xBB, 0xBF]) 
+    const blob = new Blob([ bom, rows.join('\r\n') ], { type : 'text/csv' }) 
+    const element = document.createElement('a') 
+    const objectUrl = window.URL.createObjectURL(blob)
+    element.href = objectUrl 
+    element.setAttribute('download', fileName); 
+    document.body.appendChild(element) 
+    element.click() 
+    window.URL.revokeObjectURL(objectUrl) 
+    document.body.removeChild(element) 
+} */
+
 async function processAll(){
     try{
         await getMaxPage();
@@ -223,6 +258,7 @@ async function processAll(){
         for(let i = 0; i < url_part.length; i++){
             await getScoreData(url_part[i]);
         }
+        await exportCSVFile();
     }catch(err){
         throw err;
     }
