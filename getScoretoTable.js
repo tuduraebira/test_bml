@@ -186,13 +186,23 @@ function getScoreData(url_m){
                     }
                 }
             }).done(function(data_score){
-                $(data_score).find('.diff').each(function(){
-                    let txt = $(this).find('.level').text();
+                let chart_part = [];
+                let title = $(data_score).find('#music_title').text();
+                let diff;
+                let score;
 
-                    if(txt == 18){
-                        chart_data.push(txt);
+                $(data_score).find('.music_box').each(function(){
+                    if($(this).find('.jacket_area .diff .level').text() == 18){
+                        diff = $(this).find('.jacket_area .diff .level').text();
+                        score = $('.cnt').first().text();
+
+                        chart_part.push(title);
+                        chart_part.push(diff);
+                        chart_part.push(score);
+
+                        chart_data.push(chart_part);
                     }
-                });
+                })
 
                 resolve('難易度取得完了');
             })
