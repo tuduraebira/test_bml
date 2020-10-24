@@ -101,6 +101,9 @@ function getScoreData(url_m){
                     if($(this).find('.jacket_area .diff .level').text() == 18){
                         diff = $(this).find('.jacket_area .diff .level').text();
                         score = $(this).find('.cnt').first().text();
+                        if(parseInt(score) < parseInt($(this).find('.cnt').eq(1).text())){
+                            score = $(this).find('.cnt').eq(1).text()
+                        }
 
                         chart_part.push(title);
                         chart_part.push(diff);
