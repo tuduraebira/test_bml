@@ -164,7 +164,7 @@ processAll().then(() => {
     console.log(url_part);
     console.log(chart_data);
     alert('スコアデータ出力が完了しました。');
-    //window.location.href = BASE_URL + MUSIC_URL;
+    window.location.href = BASE_URL + MUSIC_URL;
 }).catch((err) => {
     console.log(err);
 })
